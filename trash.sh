@@ -1,10 +1,8 @@
-if [ -d ~/.trash/trash.tar ]; then
-	echo "trash say hello"
+if [ -a ~/.trash/trash.tar ]; then
+	echo "trash exists $*"
 	tar -rf ~/.trash/trash.tar $*
-	# echo "$*"
 else 
-	echo "not bin"
+	echo "trash not exists $*"
 	mkdir -p ~/.trash
 	tar -cf ~/.trash/trash.tar $*
-	# echo "$*"
 fi
