@@ -1,4 +1,6 @@
-if [ -a ~/.trash/trash.tar ]; then
+#!/bin/sh
+
+if [ -e ~/.trash/trash.tar ]; then
 	echo "trash exists $*"
 	tar -rf ~/.trash/trash.tar $*
 else 
