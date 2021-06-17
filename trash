@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if [ $# -eq 0 ]; then
+	echo "Which file you decided to trash?"
+	exit 1
+fi
+
 if [ -e ~/.trash/trash.tar ]; then
 	echo "trash exists $*"
 	tar -rf ~/.trash/trash.tar $*
