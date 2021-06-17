@@ -1,0 +1,19 @@
+#!/bin/sh
+
+LOC="$HOME/.trash/trash.tar"
+
+if [ $# -eq 0 ]; then
+	echo "Which file you decided to trash?"
+	exit 1
+fi
+
+if [ -e "$LOC" ]; then
+	# echo "trash exists $*"
+	tar -rf "$LOC" $*
+else 
+	# echo "trash not exists $*"
+	mkdir -p "$HOME/.trash"
+	tar -cf "$LOC" $*
+fi
+
+echo "trash done"
