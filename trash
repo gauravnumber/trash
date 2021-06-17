@@ -1,6 +1,10 @@
 #!/bin/sh
 
+# desktop
 LOC="$HOME/.trash/trash.tar"
+
+# termux on android app
+# LOC="$HOME/storage/shared"
 
 if [ $# -eq 0 ]; then
 	echo "Which file you decided to trash?"
