@@ -13,11 +13,11 @@ fi
 
 if [ -e "$LOC" ]; then
 	# echo "trash exists $*"
-	tar -rf "$LOC" $*
+	tar -rf "$LOC" "$@"
 else 
 	# echo "trash not exists $*"
 	mkdir -p "$HOME/.trash"
-	tar -cf "$LOC" $*
+	tar -cf "$LOC" "$@"
 fi
 
 echo "trash done"
