@@ -1,23 +1,23 @@
 #!/bin/sh
 
-# desktop
-LOC="$HOME/.trash/trash.tar"
-
-# termux on android app
-# LOC="$HOME/storage/shared"
+DIR="$HOME/.trash"
+LOC="$DIR/trash.tar"
 
 if [ $# -eq 0 ]; then
 	echo "Which file you decided to trash?"
-	exit 1
+	exit 0
 fi
 
 if [ -e "$LOC" ]; then
-	# echo "trash exists $*"
+	echo "trash appended $@"
 	tar -rf "$LOC" "$@"
 else 
-	# echo "trash not exists $*"
-	mkdir -p "$HOME/.trash"
+	echo "trash created $@"
+	mkdir -p "$DIR"
 	tar -cf "$LOC" "$@"
 fi
+
+rm -rf "$@"
+echo "files removed"
 
 echo "trash done"
