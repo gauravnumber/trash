@@ -5,7 +5,7 @@ LOC="$DIR/trash.tar"
 
 if [ $# -eq 0 ]; then
 	echo "Which file you decided to trash?"
-	exit 0
+	exit 1
 fi
 
 if [ -e "$LOC" ]; then
@@ -17,7 +17,12 @@ else
 	tar -cf "$LOC" "$@"
 fi
 
-rm -rf "$@"
-echo "files removed"
+if [ $? -eq 0 ]; then
+	rm -rf "$@"
+	echo "files removed"
+else
+	echo "files can't removed"
+	exit 1
+fi
 
 echo "trash done"
