@@ -3,6 +3,25 @@
 DIR="$HOME/.trash"
 LOC="$DIR/trash.tar"
 
+while getopts ":e" opt; do
+	case $opt in
+		e) 
+			echo "All trash cleared" >&2 
+			rm ~/.trash/trash.tar
+			exit 0
+			;;
+		# a)
+		# 	echo "All trash cleared" >&2
+		# 	rm ~/.trash/trash.tar
+		# 	exit 1
+		# 	;;
+		\?) echo "Invalid option: -$OPTARG" >&2
+		exit 1
+		;;
+	esac
+done
+
+
 if [ $# -eq 0 ]; then
 	echo "Which file you decided to trash?"
 	exit 1
@@ -24,5 +43,7 @@ else
 	echo "files can't removed"
 	exit 1
 fi
+
+
 
 echo "trash done"
