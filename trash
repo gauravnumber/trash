@@ -3,42 +3,45 @@
 DIR="$HOME/.trash"
 LOC="$DIR/trash.tar"
 
-while getopts ":e" opt; do
-	case $opt in
-		e) 
-			echo "All trash cleared" >&2 
+main() {
+
+	while getopts ":e" opt; do
+		case $opt in
+		e)
+			echo "All trash cleared" >&2
 			rm ~/.trash/trash.tar
 			exit 0
 			;;
-		\?) echo "Invalid option: -$OPTARG" >&2
+		\?)
+			echo "Invalid option: -$OPTARG" >&2
+			exit 1
+			;;
+		esac
+	done
+
+	if [ $# -eq 0 ]; then
+		echo "Which file you decided to trash?"
 		exit 1
-		;;
-	esac
-done
+	fi
 
+	if [ -e "$LOC" ]; then
+		echo "trash appended $@"
+		tar -rf "$LOC" "$@"
+	else
+		echo "trash created $@"
+		mkdir -p "$DIR"
+		tar -cf "$LOC" "$@"
+	fi
 
-if [ $# -eq 0 ]; then
-	echo "Which file you decided to trash?"
-	exit 1
-fi
+	if [ $? -eq 0 ]; then
+		rm -rf "$@"
+		echo "files removed"
+	else
+		echo "files can't removed"
+		exit 1
+	fi
 
-if [ -e "$LOC" ]; then
-	echo "trash appended $@"
-	tar -rf "$LOC" "$@"
-else 
-	echo "trash created $@"
-	mkdir -p "$DIR"
-	tar -cf "$LOC" "$@"
-fi
+	echo "trash done"
+}
 
-if [ $? -eq 0 ]; then
-	rm -rf "$@"
-	echo "files removed"
-else
-	echo "files can't removed"
-	exit 1
-fi
-
-
-
-echo "trash done"
+main "$@"
