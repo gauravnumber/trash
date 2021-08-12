@@ -4,15 +4,21 @@ DIR="$HOME/.trash"
 LOC="$DIR/trash.tar"
 
 main() {
-	while getopts ":er:" opt; do
+	while getopts ":er" opt; do
 		case $opt in
-		e)
+		e) #? Empty trash
 			echo "All trash cleared" >&2
 			rm ~/.trash/trash.tar
 			exit 0
 			;;
-		r)
-			echo "restore $OPTARG" >&2
+		r) #? Restore all files in given path
+			echo "Restore all files $OPTARG" >&2
+			if [ -z $OPTARG ]; then
+				tar -xf "$LOC" -C "."
+				exit 0
+			fi
+			#? $OPTARG receiving path
+			tar -xf "$LOC" -C "$OPTARG"
 			exit 0
 			;;
 		\?)
