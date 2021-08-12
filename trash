@@ -22,7 +22,12 @@ main() {
 			exit 0
 			;;
 		l) #? Show all files in trash
-			tar -tf "$LOC"
+			if [ -e "$LOC" ]; then
+				tar -tf "$LOC"
+			else
+				echo "Trash not exist."
+				exit 0
+			fi
 			exit 0
 			;;
 		\?)
