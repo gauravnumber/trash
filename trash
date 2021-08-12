@@ -4,16 +4,23 @@ DIR="$HOME/.trash"
 LOC="$DIR/trash.tar"
 
 main() {
-
-	while getopts ":e" opt; do
+	while getopts ":er:" opt; do
 		case $opt in
 		e)
 			echo "All trash cleared" >&2
 			rm ~/.trash/trash.tar
 			exit 0
 			;;
+		r)
+			echo "restore $OPTARG" >&2
+			exit 0
+			;;
 		\?)
 			echo "Invalid option: -$OPTARG" >&2
+			exit 1
+			;;
+		:)
+			echo "-$OPTARG value required." >&2
 			exit 1
 			;;
 		esac
