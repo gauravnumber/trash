@@ -4,7 +4,7 @@ DIR="$HOME/.trash"
 LOC="$DIR/trash.tar"
 
 main() {
-	while getopts ":e :r:" opt; do
+	while getopts ":e :r: :l" opt; do
 		case $opt in
 		e) #? Empty trash
 			echo "All trash cleared" >&2
@@ -19,6 +19,15 @@ main() {
 			fi
 			#? $OPTARG receiving path
 			tar -xf "$LOC" -C "$OPTARG"
+			exit 0
+			;;
+		l) #? Show all files in trash
+			if [ -e "$LOC" ]; then
+				tar -tf "$LOC"
+			else
+				echo "Trash not exist."
+				exit 0
+			fi
 			exit 0
 			;;
 		\?)
