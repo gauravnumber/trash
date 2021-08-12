@@ -4,7 +4,7 @@ DIR="$HOME/.trash"
 LOC="$DIR/trash.tar"
 
 main() {
-	while getopts ":er" opt; do
+	while getopts ":e :r:" opt; do
 		case $opt in
 		e) #? Empty trash
 			echo "All trash cleared" >&2
@@ -19,6 +19,7 @@ main() {
 			fi
 			#? $OPTARG receiving path
 			tar -xf "$LOC" -C "$OPTARG"
+			echo "this side"
 			exit 0
 			;;
 		\?)
