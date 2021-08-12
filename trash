@@ -19,7 +19,6 @@ main() {
 			fi
 			#? $OPTARG receiving path
 			tar -xf "$LOC" -C "$OPTARG"
-			echo "this side"
 			exit 0
 			;;
 		\?)
